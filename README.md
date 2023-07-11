@@ -10,12 +10,13 @@ git submodule update --init --recursive
 sudo make linux -j 64
 ```
 Add the path of compiler to your `PATH` 
-
+```bash
   export PATH=/opt/riscv/bin/:$PATH
-
+```
 Validate the compiler
-
+```bash
   riscv64-unknown-linux-gnu-gcc -v
+```
 
 ## KVM RISCV64 on QEMU
 [wiki](https://github.com/kvm-riscv/howto/wiki/KVM-RISCV64-on-QEMU)
