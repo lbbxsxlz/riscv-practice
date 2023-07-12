@@ -19,4 +19,8 @@ Validate the compiler
 ```
 
 ## KVM RISCV64 on QEMU
+![opensbi](kvm_riscv64_on_qemu/opensbi.jpg)
+
+![welcome](kvm_riscv64_on_qemu/welcome.jpg)
+
 more detail in [test steps](kvm_riscv64_on_qemu/README.md)
