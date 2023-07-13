@@ -70,4 +70,14 @@ We need libfdt library in the cross-compile toolchain for compiling KVMTOOL RISC
 
     cd busybox-1.36.1/_install; find ./ | cpio -o -H newc > ../../rootfs_kvm_riscv64.img; cd -
 
+## Run QEMU
+
+    qemu-system-riscv64 -cpu rv64 -M virt -m 512M -nographic -kernel riscv-linux/arch/riscv/boot/Image -initrd ./rootfs_kvm_riscv64.img -append "root=/dev/root rw console=ttyS0 earlycon=sbi"
+
+load kvm module and launch the new VM in riscv linux on qemu, more detail in [output_log](testlog)
+
+    insmod modules/kvm.koS
+    lkvm-static run -m 128 -c4 --console serial -p "console=ttyS0 earlycon" -k /modules/Image --debug
+
 [reference wiki](https://github.com/kvm-riscv/howto/wiki/KVM-RISCV64-on-QEMU)
+
