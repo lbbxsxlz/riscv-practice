@@ -44,6 +44,15 @@ We need libfdt library in the cross-compile toolchain for compiling KVMTOOL RISC
     ${CROSS_COMPILE}strip lkvm-static
     cd -
 
+## Build OpenSBI
+
+    export ARCH=riscv
+    export CROSS_COMPILE=riscv64-unknown-linux-gnu-
+    git clone https://github.com/riscv-software-src/opensbi.git
+    cd opensbi
+    make PLATFORM=generic -j64
+    cd -
+
 ## Make rootfs
 
     export ARCH=riscv
@@ -71,8 +80,27 @@ We need libfdt library in the cross-compile toolchain for compiling KVMTOOL RISC
     cd busybox-1.36.1/_install; find ./ | cpio -o -H newc > ../../rootfs_kvm_riscv64.img; cd -
 
 ## Run QEMU
+Using OpenSBI emulated in qemu
 
     qemu-system-riscv64 -cpu rv64 -M virt -m 512M -nographic -kernel riscv-linux/arch/riscv/boot/Image -initrd ./rootfs_kvm_riscv64.img -append "root=/dev/root rw console=ttyS0 earlycon=sbi"
+
+Using OpenSBI firmware
+
+    qemu-system-riscv64 -cpu rv64 -M virt -m 512M -nographic -bios opensbi/build/platform/generic/firmware/fw_jump.bin -kernel riscv-linux/arch/riscv/boot/Image -initrd ./rootfs_kvm_riscv64.img -append "root=/dev/root rw console=ttyS0 earlycon=sbi"
+
+```
+
+OpenSBI v1.3-21-gea6533a
+   ____                    _____ ____ _____
+  / __ \                  / ____|  _ \_   _|
+ | |  | |_ __   ___ _ __ | (___ | |_) || |
+ | |  | | '_ \ / _ \ '_ \ \___ \|  _ < | |
+ | |__| | |_) |  __/ | | |____) | |_) || |_
+  \____/| .__/ \___|_| |_|_____/|____/_____|
+        | |
+        |_|
+
+```
 
 load kvm module and launch the new VM in riscv linux on qemu, more detail in [output_log](testlog)
 

@@ -28,3 +28,11 @@ commit 0b5e55fc032d1c6394b8ec7fe02d842813c903df (HEAD -> master, origin/master, 
 
 Author: Jean-Philippe Brucker <jean-philippe@linaro.org>
 Date:   Wed Jun 28 12:23:32 2023 +0100
+
+
+opensbi https://github.com/riscv-software-src/opensbi.git
+
+commit ea6533ada828cf71b9359f566be0f9c640022543 (HEAD -> master, origin/master, origin/HEAD)
+
+Author: Anup Patel <apatel@ventanamicro.com>
+Date:   Tue Jul 11 09:00:31 2023 +0530
