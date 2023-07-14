@@ -24,3 +24,12 @@ Validate the compiler
 ![welcome](kvm_riscv64_on_qemu/welcome.jpg)
 
 more detail in [test steps](kvm_riscv64_on_qemu/README.md)
+
+## KVM RISCV AIA on qemu
+![aia_driver](kvm_aia_on_qemu/aia.jpg)
+
+![aplic_interrupt](kvm_aia_on_qemu/aplic.jpg)
+
+![vm_interrupt](kvm_aia_on_qemu/imsic.jpg)
+
+The test steps are described in [document](kvm_aia_on_qemu/README.md)
