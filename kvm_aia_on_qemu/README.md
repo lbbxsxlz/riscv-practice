@@ -58,3 +58,11 @@ If you want to install libdft, please see the [document](../kvm_riscv64_on_qemu/
 
     ./qemu-system-riscv64 -cpu rv64 -M virt,aia=aplic-imsic,aia-guests=7 -m 512M -nographic -smp 4 -bios opensbi/build/platform/generic/firmware/fw_jump.bin -kernel riscv_aia_v6/arch/riscv/boot/Image -initrd ./rootfs_kvm_riscv64.img -append "root=/dev/ram rw console=ttyS0 earlycon=sbi"
 
+load kvm module and launch the new VM
+    mount -t debugfs debugfs /sys/kernel/debug
+    insmod modules/kvm.ko
+    echo 132 > /proc/sys/vm/nr_hugepages
+    mkdir hugetlbfs
+    mount -t hugetlbfs none /hugetlbfs
+
+    lkvm-static run -m 256 -c2 --console virtio -p "earlycon" -k /modules/Image --hugetlbfs /hugetlbfs --debug
