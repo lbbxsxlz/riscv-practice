@@ -1,7 +1,7 @@
 # RISCV IOMMU on qemu
 
 ## Build Qemu
-add --enable-slirp option for -netdev 
+add --enable-slirp option for -netdev
 
     export ARCH=riscv
     export CROSS_COMPILE=riscv64-unknown-linux-gnu-
@@ -29,5 +29,26 @@ add --enable-slirp option for -netdev
     make O=build -j64 Image
     cd ../
 
-[reference](https://raw.githubusercontent.com/tjeznach/docs/master/riscv-iommu/run-qemu.sh)
+ ## Make the rootfs
+    sudo su
+    truncate -s 1G kinetic.img
+    mkfs.ext4 kinetic.img
+    mkdir -p kinetic
+    mount -oloop kinetic.img kinetic
+    debootstrap --arch=riscv64 kinetic kinetic
+    sed 's/root:.:/root::/' -i kinetic/etc/shadow
+    echo 'riscv-guest' > kinetic/etc/hostname
+    umount kinetic
+    cp kinetic.img nvme1.img
+    mount -oloop kinetic.img kinetic
+    cp lkvm-static kinetic/usr/bin
+    cp linux/build/arch/riscv/boot/Image kinetic/usr/share/Image
+    echo 'riscv-host' > kinetic/etc/hostname
+    cp testcmd.sh kinetic/usr/bin
+    umount kinetic
+    cp kinetic.img nvme0.img
+    rm -rf kinetic*
+    exit
 
+
+[reference](https://raw.githubusercontent.com/tjeznach/docs/master/riscv-iommu/run-qemu.sh)
