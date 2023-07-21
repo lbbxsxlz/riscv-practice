@@ -50,5 +50,14 @@ add --enable-slirp option for -netdev
     rm -rf kinetic*
     exit
 
+## Launch the VM
+
+    qemu/build/qemu-system-riscv64 -bios qemu/build/platform/generic/firmware/fw_jump.elf -append "nokaslr earlycon=sbi console=ttyS0 root=/dev/vda rw" -kernel linux/build/arch/riscv/boot/Image -no-reboot -no-user-config -nographic -machine virt,aia=aplic-imsic,aia-guests=4 -cpu rv64 -smp 2 -m 4G -object memory-backend-file,id=sysmem,mem-path=/tmp/4g,size=4G,share=on -drive file=nvme0.img,format=raw,read-only=off,id=nvme0 -drive file=nvme1.img,format=raw,read-only=off,id=nvme1 -netdev user,id=host-net,hostfwd=tcp::2223-:23 -device x-riscv-iommu-pci,addr=1.0 -device virtio-blk-pci,disable-legacy=on,disable-modern=off,iommu_platform=on,ats=on,drive=nvme0,addr=3.0 -device virtio-net-pci,romfile=,netdev=host-net,disable-legacy=on,disable-modern=off,iommu_platform=on,ats=on,addr=7.0 -device nvme,serial=87654321,drive=nvme1,addr=4.0
+
+
+
+    echo "0000:00:04.0" > /sys/bus/pci/devices/0000:00:04.0/driver/unbind
+    echo "1b36 0010" > /sys/bus/pci/drivers/vfio-pci/new_id
+    lkvm-static run -m 256 -c2 --console virtio -p "nokaslr console=ttyS0 root=/dev/nvme0q1" -k /usr/share/Image --vfio-pci 0000:00:04.0 -d /dev/nvme0q1
 
 [reference](https://raw.githubusercontent.com/tjeznach/docs/master/riscv-iommu/run-qemu.sh)
