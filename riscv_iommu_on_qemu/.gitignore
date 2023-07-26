@@ -1,0 +1,4 @@
+linux
+qemu
+lkvm-static
+nvme*
