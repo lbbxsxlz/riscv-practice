@@ -3,8 +3,11 @@ Technology Readiness for RISC-V
 
 ## RISC-V GNU Compiler Toolchain
 Download and compile the RISC-V Toolchain, more detail in [riscv-toolchain](https://github.com/riscv-collab/riscv-gnu-toolchain)
+qemu is not necessary for toolchain, can remove it
 ```bash
 git clone https://github.com/riscv/riscv-gnu-toolchain
+sudo apt-get install autoconf automake autotools-dev curl python3 python3-pip libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc zlib1g-dev libexpat-dev ninja-build git cmake libglib2.0-dev
+git rm qemu
 git submodule update --init --recursive
 ./configure --prefix=/opt/riscv
 sudo make linux -j 64
