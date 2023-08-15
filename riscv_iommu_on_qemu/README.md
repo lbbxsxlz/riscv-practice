@@ -69,7 +69,10 @@ fix the err:note: the `riscv64gc-unknown-linux-gnu` target may not be installed
 error: could not find system library 'libcap' required by the 'minijail-sys' crate
 
     sudo apt install  libcap-dev
- 
+
+error: could not find -lcap: No such file or directory
+    
+    see [libcap cross compile](libcap_compile.md)  
     
 ## Launch the VM
 
