@@ -71,8 +71,8 @@ error: could not find system library 'libcap' required by the 'minijail-sys' cra
     sudo apt install  libcap-dev
 
 error: could not find -lcap: No such file or directory
-    
-    see [libcap cross compile](libcap_compile.md)  
+
+how to fix please see [libcap cross compile](libcap_compile.md)
     
 ## Launch the VM
 
