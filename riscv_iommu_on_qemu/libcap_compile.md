@@ -6,11 +6,11 @@
 
 
         _makenames: _makenames.c cap_names.list.h
-	ifeq ($(CROSS_COMPILE), )
-		$(BUILD_CC) $(BUILD_CFLAGS) $(BUILD_CPPFLAGS) $< -o $@
-	else
-		gcc $(BUILD_CFLAGS) $(BUILD_CPPFLAGS) $< -o $@
-	endif
+        ifeq ($(CROSS_COMPILE), )
+                $(BUILD_CC) $(BUILD_CFLAGS) $(BUILD_CPPFLAGS) $< -o $@
+        else
+                gcc $(BUILD_CFLAGS) $(BUILD_CPPFLAGS) $< -o $@
+        endif
 
     make CROSS_COMPILE=riscv64-linux-gnu- prefix=/opt/libcap/riscv64-linux-gnu-
      
