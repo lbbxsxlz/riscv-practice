@@ -7,8 +7,13 @@
 
     docker run -it --entrypoint /bin/bash keystoneenclaveorg/keystone:master
 
+    # in container
     cd /keystone
     source source.sh
     cd build
     make run-tests
+    ./scripts/run-qemu.sh
 
+     #qemu
+     insmod keystone-driver.ko
+     ./attestor.ke
