@@ -11,7 +11,11 @@ You can skip this step if `qemu-system-riscv64` tool has existed in your buildin
     cd -
 
 ## Build linux kernel for host and guest
-
+ 
+    # install dependency
+    sudo apt install libelf-dev
+    sudo apt install libssl-dev
+   
     export ARCH=riscv
     export CROSS_COMPILE=riscv64-unknown-linux-gnu-
     git clone https://github.com/kvm-riscv/linux.git
@@ -104,7 +108,7 @@ OpenSBI v1.3-21-gea6533a
 
 load kvm module and launch the new VM in riscv linux on qemu, more detail in [output_log](testlog)
 
-    insmod modules/kvm.koS
+    insmod modules/kvm.ko
     lkvm-static run -m 128 -c4 --console serial -p "console=ttyS0 earlycon" -k /modules/Image --debug
 
 [reference wiki](https://github.com/kvm-riscv/howto/wiki/KVM-RISCV64-on-QEMU)
