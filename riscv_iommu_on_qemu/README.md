@@ -73,7 +73,15 @@ error: could not find system library 'libcap' required by the 'minijail-sys' cra
 error: could not find -lcap: No such file or directory
 
 how to fix please see [libcap cross compile](libcap_compile.md)
-    
+
+error: thread 'main' panicked at 'protoc binary not found: cannot find binary path', /home/binbin/.cargo/registry/src/github.com-1ecc6299db9ec823/protoc-2.27.1/src/lib.rs:209:17
+
+    sudo apt install protobuf-compiler
+or
+    wget https://github.com/protocolbuffers/protobuf/releases/download/v24.0/protoc-24.0-linux-x86_64.zip
+    unzip protoc-24.0-linux-x86_64.zip -d protoc-24.0
+    cp protoc-24.0/bin/protoc /usr/local/bin/
+
 ## Launch the VM
 
     qemu/build/qemu-system-riscv64 -bios qemu/build/platform/generic/firmware/fw_jump.elf -append "nokaslr earlycon=sbi console=ttyS0 root=/dev/vda rw" -kernel linux/build/arch/riscv/boot/Image -no-reboot -no-user-config -nographic -machine virt,aia=aplic-imsic,aia-guests=4 -cpu rv64 -smp 2 -m 4G -object memory-backend-file,id=sysmem,mem-path=/tmp/4g,size=4G,share=on -drive file=nvme0.img,format=raw,read-only=off,id=nvme0 -drive file=nvme1.img,format=raw,read-only=off,id=nvme1 -netdev user,id=host-net,hostfwd=tcp::2223-:23 -device x-riscv-iommu-pci,addr=1.0 -device virtio-blk-pci,disable-legacy=on,disable-modern=off,iommu_platform=on,ats=on,drive=nvme0,addr=3.0 -device virtio-net-pci,romfile=,netdev=host-net,disable-legacy=on,disable-modern=off,iommu_platform=on,ats=on,addr=7.0 -device nvme,serial=87654321,drive=nvme1,addr=4.0
