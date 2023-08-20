@@ -1,32 +1,36 @@
 # RISCV IOMMU on qemu
 
 ## Build Qemu
+# dependency libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev
 add --enable-slirp option for -netdev
 
     export ARCH=riscv
-    export CROSS_COMPILE=riscv64-unknown-linux-gnu-
+    export CROSS_COMPILE=riscv64-linux-gnu-
     git clone https://github.com/tjeznach/qemu.git
     cd qemu
     git checkout tjeznach/riscv-iommu
     git submodule update --init
     ./configure --target-list="riscv32-softmmu riscv64-softmmu" --enable-slirp
-    make -j 64
+    make -j $(nproc)
+
+## Build opensbi
+
+    make -C roms/opensbi O=../../build PLATFORM_RISCV_XLEN=64 PLATFORM=generic -j $(nproc)
     cd -
 
 ## Build linux kernel
     export ARCH=riscv
-    export CROSS_COMPILE=riscv64-unknown-linux-gnu-
+    export CROSS_COMPILE=riscv64-linux-gnu-
     git clone https://github.com/tjeznach/linux.git
     cd linux
     git checkout tjeznach/riscv-iommu-aia
-    cd -
 
     mkdir build
-    make  O=build -j64 defconfig
+    make  O=build -j $(nproc) defconfig
     cd build
     ../scripts/kconfig/merge_config.sh .config ../../vfio.config
     cd ..
-    make O=build -j64 Image
+    make O=build -j $(nproc) Image
     cd ../
 
  ## Make the rootfs
@@ -71,6 +75,7 @@ You can see the document[doc](fix_error_in_building_crosvm.md) as reference to f
 
     echo "0000:00:04.0" > /sys/bus/pci/devices/0000:00:04.0/driver/unbind
     echo "1b36 0010" > /sys/bus/pci/drivers/vfio-pci/new_id
-    lkvm-static run -m 256 -c2 --console virtio -p "nokaslr console=ttyS0 root=/dev/nvme0q1" -k /usr/share/Image --vfio-pci 0000:00:04.0 -d /dev/nvme0q1
+
+    crosvm --no-syslog run --disable-sandbox -p 'nokaslr console=ttyS0 root=/dev/nvme0n1' --vfio "/sys/bus/pci/devices/0000:00:04.0" /usr/share/Image
 
 [reference](https://raw.githubusercontent.com/tjeznach/docs/master/riscv-iommu/run-qemu.sh)
