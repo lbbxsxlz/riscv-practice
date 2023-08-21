@@ -30,7 +30,7 @@
     CONFIG_INITRAMFS_ROOT_GID=0
     CONFIG_RD_GZIP=y
 
-    make ARCH=riscv CROSS_COMPILE=riscv64-unknow-linux-gnu- -j 64
+    make ARCH=riscv CROSS_COMPILE=riscv64-unknow-linux-gnu- -j $(nproc)
 
     cd -
 ## Lunch the VM

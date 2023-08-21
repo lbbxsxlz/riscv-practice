@@ -7,21 +7,21 @@ You can skip this step if `qemu-system-riscv64` tool has existed in your buildin
     cd qemu
     git submodule update --init --recursive
     ./configure --target-list="riscv32-softmmu riscv64-softmmu"
-    make -j 64
+    make -j $(nproc)
     cd -
 
 ## Build linux kernel for host and guest
- 
+
     # install dependency
     sudo apt install libelf-dev
     sudo apt install libssl-dev
-   
+
     export ARCH=riscv
     export CROSS_COMPILE=riscv64-unknown-linux-gnu-
     git clone https://github.com/kvm-riscv/linux.git
     mkdir riscv-linux
     make -C linux O=`pwd`/riscv-linux defconfig
-    make -C linux O=`pwd`/riscv-linux -j 64
+    make -C linux O=`pwd`/riscv-linux -j $(nproc)
 
 ## Build libfdt and kvmtool
 We need libfdt library in the cross-compile toolchain for compiling KVMTOOL RISC-V. The libfdt library is generally not available in the cross-compile toolchain so we need to explicitly compile libfdt from DTC project and add it to CROSS_COMPILE SYSROOT directory.
@@ -34,7 +34,7 @@ We need libfdt library in the cross-compile toolchain for compiling KVMTOOL RISC
     SYSROOT=$($CC -print-sysroot)
     git clone https://git.kernel.org/pub/scm/utils/dtc/dtc.git
     cd dtc
-    make libfdt -j 64
+    make libfdt -j $(nproc)
     make NO_PYTHON=1 NO_YAML=1 DESTDIR=$SYSROOT PREFIX=/usr LIBDIR=/usr/lib64/lp64d install-lib install-includes
     cd -
 
@@ -44,7 +44,7 @@ We need libfdt library in the cross-compile toolchain for compiling KVMTOOL RISC
     export CROSS_COMPILE=riscv64-unknown-linux-gnu-
     git clone https://git.kernel.org/pub/scm/linux/kernel/git/will/kvmtool.git
     cd kvmtool
-    make lkvm-static -j 64
+    make lkvm-static -j $(nproc)
     ${CROSS_COMPILE}strip lkvm-static
     cd -
 
@@ -54,7 +54,7 @@ We need libfdt library in the cross-compile toolchain for compiling KVMTOOL RISC
     export CROSS_COMPILE=riscv64-unknown-linux-gnu-
     git clone https://github.com/riscv-software-src/opensbi.git
     cd opensbi
-    make PLATFORM=generic -j64
+    make PLATFORM=generic -j $(nproc)
     cd -
 
 ## Make rootfs
