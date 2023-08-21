@@ -10,10 +10,11 @@ echo 'riscv-guest' > kinetic/etc/hostname
 umount kinetic
 cp kinetic.img nvme1.img
 mount -oloop kinetic.img kinetic
-cp lkvm-static kinetic/usr/bin
+#cp lkvm-static kinetic/usr/bin
+cp crosvm/target/riscv64gc-unknown-linux-gnu/release/crosvm kinetic/usr/bin/
 cp linux/build/arch/riscv/boot/Image kinetic/usr/share/Image
 echo 'riscv-host' > kinetic/etc/hostname
-cp testcmd.sh kinetic/usr/bin
+cp testcmd.sh kinetic/usr/bin/
 umount kinetic
 cp kinetic.img nvme0.img
 rm -rf kinetic*
