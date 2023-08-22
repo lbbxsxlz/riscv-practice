@@ -17,4 +17,4 @@ git checkout $branch
 cd -
 mkdir -p $branch
 make -C linux O=`pwd`/$branch defconfig
-make -C linux O=`pwd`/$branch -j 64
+make -C linux O=`pwd`/$branch -j $(nproc)

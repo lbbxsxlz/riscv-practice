@@ -7,6 +7,6 @@ export CROSS_COMPILE=riscv64-unknown-linux-gnu-
 git clone https://github.com/avpatel/kvmtool.git
 cd kvmtool
 git checkout riscv_aia_v1
-make lkvm-static -j 64
+make lkvm-static -j $(nproc)
 ${CROSS_COMPILE}strip lkvm-static
 cd -
