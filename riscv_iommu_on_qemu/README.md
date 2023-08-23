@@ -1,7 +1,6 @@
 # RISCV IOMMU on qemu
 
 ## Build Qemu
-# dependency libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev
 add --enable-slirp option for -netdev
 
     export ARCH=riscv

@@ -3,6 +3,8 @@
 ## Build Qemu
 You can skip this step if `qemu-system-riscv64` tool has existed in your building environment.
 
+    #install dependency
+    sudo apt install libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev -y
     git clone https://gitlab.com/qemu-project/qemu.git
     cd qemu
     git submodule update --init --recursive
