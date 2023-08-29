@@ -13,7 +13,8 @@
     cd build
     make run-tests
     ./scripts/run-qemu.sh
+Login as root with the password sifive
 
-     #qemu
+     #In qemu
      insmod keystone-driver.ko
      ./attestor.ke
