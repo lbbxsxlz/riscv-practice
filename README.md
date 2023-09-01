@@ -10,7 +10,10 @@ sudo apt-get install autoconf automake autotools-dev curl python3 python3-pip li
 git rm qemu
 git submodule update --init --recursive
 ./configure --prefix=/opt/riscv
-sudo make linux -j 64
+sudo make linux -j $(nproc)
+
+./configure --prefix=/opt/riscv --with-arch=rv64imafdc_zicsr_zifencei --with-abi=lp64d
+make -j $(nproc)
 ```
 Add the path of compiler to your `PATH`
 ```bash
