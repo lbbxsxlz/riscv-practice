@@ -18,3 +18,9 @@ Login as root with the password sifive
      #In qemu
      insmod keystone-driver.ko
      ./attestor.ke
+
+## Start without Docker
+
+    bash -x prepare.sh
+    cmake_build.sh
+    ./scripts/run-qemu.sh
