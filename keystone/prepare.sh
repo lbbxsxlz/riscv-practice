@@ -16,7 +16,8 @@ git rm runtime/test/cmocka
 
 git submodule update --init --recursive
 
-# but
+# But find the compilation error when using the newest compiler
+# /opt/workspace/keystone/sm/opensbi/lib/sbi/sbi_tlb.c:190: Error: unrecognized opcode fence.i', extension zifencei' required
 mkdir -p RISCV64
 wget https://keystone-enclave.eecs.berkeley.edu/files/riscv-toolchain-lp64d-rv64gc-2021.01.bionic.7z
 7za x -y riscv-toolchain-lp64d-rv64gc-2021.01.bionic.7z -o./RISCV64
