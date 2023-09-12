@@ -3,7 +3,7 @@
 ## Build initrd
 
    export ARCH=riscv
-   export CROSS_COMPILE=riscv64-unknow-linux-gnu-
+   export CROSS_COMPILE=riscv64-unknown-linux-gnu-
 
    # make rootfs
    tar jxvf busybox-1.36.1.tar.bz2
@@ -23,14 +23,14 @@
 ## Modify kernel config
 
     cd linux
-    make ARCH=riscv CROSS_COMPILE=riscv64-unknow-linux-gnu- defconfig
+    make ARCH=riscv CROSS_COMPILE=riscv64-unknown-linux-gnu- defconfig
 
     CONFIG_INITRAMFS_SOURCE="../rootfs.cpio.gz"
     CONFIG_INITRAMFS_ROOT_UID=0
     CONFIG_INITRAMFS_ROOT_GID=0
     CONFIG_RD_GZIP=y
 
-    make ARCH=riscv CROSS_COMPILE=riscv64-unknow-linux-gnu- -j $(nproc)
+    make ARCH=riscv CROSS_COMPILE=riscv64-unknown-linux-gnu- -j $(nproc)
 
     cd -
 ## Lunch the VM
