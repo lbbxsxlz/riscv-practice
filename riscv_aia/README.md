@@ -13,7 +13,7 @@ For this case, the qemu must include riscv hypersior extension and aia.
 
 ## Build kvmtool
 libdft has been installed in building environment, so can skip the steps.
-If you want to install libdft, please see the [document](../kvm_riscv64_on_qemu/README.md).
+If you want to install libdft, please see the [document](../riscv_kvm/README.md).
 
     export ARCH=riscv
     export CROSS_COMPILE=riscv64-unknown-linux-gnu-
@@ -38,7 +38,7 @@ If you want to install libdft, please see the [document](../kvm_riscv64_on_qemu/
     make -C linux O=`pwd`/riscv_aia_v6 -j $(nproc)
 
  ## Update the rootfs
- The steps of making `rootfs_kvm_riscv64.img` are described in [document](../kvm_riscv64_on_qemu/README.md).
+ The steps of making `rootfs_kvm_riscv64.img` are described in [document](../riscv_kvm/README.md).
 
     mkdir initrd
     cp rootfs_kvm_riscv64.img initrd/

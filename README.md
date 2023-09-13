@@ -25,22 +25,22 @@ Validate the compiler
 ```
 
 ## KVM RISCV64 on QEMU
-![opensbi](kvm_riscv64_on_qemu/opensbi.jpg)
+![opensbi](riscv_kvm/opensbi.jpg)
 
-![welcome](kvm_riscv64_on_qemu/welcome.jpg)
+![welcome](riscv_kvm/welcome.jpg)
 
-more detail in [test steps](kvm_riscv64_on_qemu/README.md)
+more detail in [test steps](riscv_kvm/README.md)
 
 ## KVM RISCV AIA on qemu
-![aia_driver](kvm_aia_on_qemu/aia.jpg)
+![aia_driver](riscv_aia/aia.jpg)
 
-![aplic_interrupt](kvm_aia_on_qemu/aplic.jpg)
+![aplic_interrupt](riscv_aia/aplic.jpg)
 
-![vm_interrupt](kvm_aia_on_qemu/imsic.jpg)
+![vm_interrupt](riscv_aia/imsic.jpg)
 
-The test steps are described in [document](kvm_aia_on_qemu/README.md)
+The test steps are described in [document](riscv_aia/README.md)
 
 ## IOMMU on qemu
-![iommu](riscv_iommu_on_qemu/iommu.jpg)
+![iommu](riscv_iommu/iommu.jpg)
 
-More details in [README](riscv_iommu_on_qemu/README.md)
+More details in [README](riscv_iommu/README.md)

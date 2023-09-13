@@ -64,7 +64,7 @@ add --enable-slirp option for -netdev
     export CROS_RUST=1
     cargo build --no-default-features --target=riscv64gc-unknown-linux-gnu --release
 
-You can see the document[doc](fix_error_in_building_crosvm.md) as reference to fix the errors if you meet.
+You can see the [document](fix_error_in_building_crosvm.md) as reference to fix the errors if you meet.
 
 ## Launch the VM
 
