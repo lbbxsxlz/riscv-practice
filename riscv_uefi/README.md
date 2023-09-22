@@ -7,6 +7,7 @@ The minimum QEMU version required is [8.1](https://wiki.qemu.org/Planning/8.1) o
     cd qemu
     git submodule update --init
     ./configure --target-list=riscv64-softmmu;make -j $(nproc)
+    cd -
 
 
 ## build edk2
@@ -29,3 +30,17 @@ The minimum QEMU version required is [8.1](https://wiki.qemu.org/Planning/8.1) o
 
     truncate -s 32M RISCV_VIRT_CODE.fd
     truncate -s 32M RISCV_VIRT_VARS.fd
+
+## linux
+    git clone --branch riscv_acpi https://github.com/ventanamicro/linux.git linux
+    cd linux
+    make ARCH=riscv CROSS_COMPILE=riscv64-linux-gnu- defconfig
+    make ARCH=riscv CROSS_COMPILE=riscv64-linux-gnu- -j $(nproc)
+    cd -
+
+## opensbi
+    git clone https://github.com/riscv-software-src/opensbi.git
+    cd opensbi
+    make ARCH=riscv CROSS_COMPILE=riscv64-linux-gnu- PLATFORM=generic -j $(nproc)
+    cp build/platform/generic/firmware/fw_dynamic.bin ../
+    cd -
