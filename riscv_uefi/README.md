@@ -44,3 +44,10 @@ The minimum QEMU version required is [8.1](https://wiki.qemu.org/Planning/8.1) o
     make ARCH=riscv CROSS_COMPILE=riscv64-linux-gnu- PLATFORM=generic -j $(nproc)
     cp build/platform/generic/firmware/fw_dynamic.bin ../
     cd -
+
+ ## buildroot
+    git clone https://github.com/buildroot/buildroot.git
+    cd buildroot
+    make qemu_riscv64_virt_defconfig
+    make rootfs-ext2
+    cd -
